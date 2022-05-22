@@ -38,22 +38,22 @@ class _CenterListWidgetState extends State<CenterListWidget> {
                             fontWeight: FontWeight.w800,
                           )),
                     ),
-                    Container(
-                      height: 100,
-                      width: 100,
-                      child: IconButton(
-                      iconSize: 48.0,
+                    IconButton(
+                      iconSize: 54.0,
+splashRadius: 32.0,
 
-                        onPressed: () {
-                          context.read<RepoData>().setVisible(true);
-                        },
-                        icon: const Icon(Icons.add,),
 
-                      ),
+
+                      onPressed: () {
+                        context.read<RepoData>().setVisible(true);
+                      },
+                      icon: const Icon( Icons.add,
+                        ),
+
                     ),                      SizedBox(height: 100,),
                   ]),
             ),
-
+            SizedBox(height: 20,),
             VisibleWidget(controller: controller),
             Expanded(
               child: Container(
