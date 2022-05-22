@@ -35,17 +35,21 @@ class _CenterListWidgetState extends State<CenterListWidget> {
                           //  textAlign: TextAlign.start,
                           style: TextStyle(
                             fontSize: 60,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w800,
                           )),
                     ),
-                    IconButton(
-                    iconSize: 50.0,
+                    Container(
+                      height: 100,
+                      width: 100,
+                      child: IconButton(
+                      iconSize: 48.0,
 
-                      onPressed: () {
-                        context.read<RepoData>().setVisible(true);
-                      },
-                      icon: const Icon(Icons.add,),
+                        onPressed: () {
+                          context.read<RepoData>().setVisible(true);
+                        },
+                        icon: const Icon(Icons.add,),
 
+                      ),
                     ),                      SizedBox(height: 100,),
                   ]),
             ),
