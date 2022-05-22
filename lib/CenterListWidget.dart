@@ -6,8 +6,6 @@ import 'package:task_list/fluversCrud.dart';
 import 'package:task_list/list_page.dart';
 import 'package:task_list/repoData.dart';
 
-
-
 class CenterListWidget extends StatefulWidget {
   const CenterListWidget({
     Key? key,
@@ -40,20 +38,22 @@ class _CenterListWidgetState extends State<CenterListWidget> {
                     ),
                     IconButton(
                       iconSize: 54.0,
-splashRadius: 32.0,
-
-
-
+                      splashRadius: 32.0,
                       onPressed: () {
                         context.read<RepoData>().setVisible(true);
                       },
-                      icon: const Icon( Icons.add,
-                        ),
-
-                    ),                      SizedBox(height: 100,),
+                      icon: const Icon(
+                        Icons.add,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 100,
+                    ),
                   ]),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             VisibleWidget(controller: controller),
             Expanded(
               child: Container(
@@ -73,9 +73,6 @@ splashRadius: 32.0,
     );
   }
 
-
-
-
   _loadItemTasks() async {
     fluversCrud crud = fluversCrud();
     List<Flavor> list = await crud.getAll();
@@ -93,7 +90,7 @@ splashRadius: 32.0,
 }
 
 class VisibleWidget extends StatelessWidget {
-  const VisibleWidget({
+  VisibleWidget({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -108,18 +105,23 @@ class VisibleWidget extends StatelessWidget {
       // maintainAnimation: true,
       visible: context.watch<RepoData>().getVisible,
       child: TextField(
+
         enabled: true,
         autofocus: true,
         controller: controller,
         onEditingComplete: () async {
-
-        fluversCrud crud = fluversCrud();
-        crud.init();
-        // int id = await  crud.add(controller.text);
-   Flavor flavor = Flavor(name: controller.text, id:0);
-    context.read<RepoData>().addFlavor(flavor);
-       context.read<RepoData>().setVisible(false);
-         controller.text = '';
+          if (controller.text == null || controller.text == '') {
+            context.read<RepoData>().setErrorText(true);
+          } else {
+            context.read<RepoData>().setErrorText(false);
+            fluversCrud crud = fluversCrud();
+            crud.init();
+            // int id = await  crud.add(controller.text);
+            Flavor flavor = Flavor(name: controller.text, id: 0);
+            context.read<RepoData>().addFlavor(flavor);
+            context.read<RepoData>().setVisible(false);
+            controller.text = '';
+          }
           /*
           ItemTaskCrud crud = ItemTaskCrud();
           int id = await crud.add(controller.text);
@@ -127,12 +129,20 @@ class VisibleWidget extends StatelessWidget {
           context.read<RepoData>().addTask(itemTask);
            */
         },
-        decoration: const InputDecoration(
-          hintText: 'Enter text of task',
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              borderSide: BorderSide(color: Colors.blueAccent, width: 1.0)),
-        ),
+        decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderSide: BorderSide(
+                    color: context.read<RepoData>().getErrorText
+                        ? Colors.red
+                        : Colors.blueAccent,
+                    width: 1.0)),
+            labelText: 'Введите имя задачи',
+            errorText: context.read<RepoData>().getErrorText
+                ? 'Поле ввода не может быть пустым'
+                : null),
+        // decoration: const InputDecoration(
+        //   hintText: '',
       ),
     );
   }

@@ -11,7 +11,12 @@ class RepoData with ChangeNotifier, DiagnosticableTreeMixin {
   bool _visible = false;
   List<ItemTask> _list = [];
   List<Flavor> _listFlavor = [];
-
+  bool ErrorText =false;
+  void setErrorText(bool _ErrorText) {
+    ErrorText = _ErrorText;
+    notifyListeners();
+  }
+  bool get getErrorText => ErrorText;
   List<Flavor> get getFlavors => _listFlavor;
 
   void addFlavor(Flavor flavor) {
