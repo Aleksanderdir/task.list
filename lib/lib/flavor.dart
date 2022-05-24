@@ -1,17 +1,18 @@
 class Flavor {
-  final String name;
+  final String NameFlavor;
   final bool isFavorite;
-int id = 0;
-  Flavor({required this.name, this.isFavorite = false, required this.id });
+  int Id = 0;
+  Flavor({required this.NameFlavor, this.isFavorite = false, required this.Id});
 
-  Flavor copyWith({int? id, String? name, bool? isFavorite }) => Flavor(
-      name: name ?? this.name, isFavorite: isFavorite ?? this.isFavorite, id: id
-      ?? this.id);
+  Flavor copyWith({int? Id, String? name, bool? isFavorite}) => Flavor(
+      NameFlavor: name ?? this.NameFlavor,
+      isFavorite: isFavorite ?? this.isFavorite,
+      Id: Id ?? this.Id);
 
   @override
   String toString() {
     // TODO: implement toString
-    return ' name: $name isFavorite: $isFavorite ';
+    return ' NameFlavor: $NameFlavor isFavorite: $isFavorite ';
   }
 }
 //SELECT id, TextTask, IsExec FROM [tasks]

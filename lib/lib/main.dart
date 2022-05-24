@@ -50,18 +50,5 @@ class MyApp extends StatelessWidget {
         );
       },
     );
-    /* return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('задачи'),
-        ),
-        body: const CenterListWidget(),
-      ),
-    );*/
   }
 }

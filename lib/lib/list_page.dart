@@ -43,7 +43,7 @@ class _ListPageState extends State<ListPage> {
       itemBuilder: (context, index) {
         final flavor = flavors[index];
         return Dismissible(
-          key: Key(flavor.name),
+          key: Key(flavor.NameFlavor),
           background: Container(
             color: Colors.green,
             child: Align(
@@ -76,7 +76,7 @@ class _ListPageState extends State<ListPage> {
               final snackbarController =
                   ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Deleted ${flavor.name}'),
+                  content: Text('Deleted ${flavor.NameFlavor}'),
                   action: SnackBarAction(
                       label: 'Undo', onPressed: () => delete = false),
                 ),
@@ -93,7 +93,7 @@ class _ListPageState extends State<ListPage> {
           child: Card(
             child: ListTile(
               title: Text(
-                flavor.name,
+                flavor.NameFlavor,
               ),
               trailing: Icon(
                   flavor.isFavorite ? Icons.favorite : Icons.favorite_border),
