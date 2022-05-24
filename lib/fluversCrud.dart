@@ -50,6 +50,7 @@ class fluversCrud {
   }
 
   del(int id) async {
+    print(id);
     var databasesPath = await getDatabasesPath();
     String path = join(databasesPath, 'data3.db');
     Database database = await openDatabase(path, version: 1);

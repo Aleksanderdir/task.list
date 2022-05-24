@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:task_list/repoData.dart';
 
 import 'flavor.dart';
+import 'fluversCrud.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({Key? key}) : super(key: key);
@@ -66,6 +67,10 @@ class _ListPageState extends State<ListPage> {
           ),
           confirmDismiss: (direction) async {
             if (direction == DismissDirection.startToEnd) {
+              fluversCrud crud = fluversCrud();
+
+              await crud.edit(flavors[index].Id, flavors[index].NameFlavor,
+                  !flavors[index].isFavorite);
               setState(() {
                 flavors[index] =
                     flavor.copyWith(isFavorite: !flavor.isFavorite);
@@ -85,18 +90,34 @@ class _ListPageState extends State<ListPage> {
               return delete;
             }
           },
-          onDismissed: (_) {
+          onDismissed: (_) async {
+            fluversCrud crud = fluversCrud();
+
+            await crud.del(flavors[index].Id);
+            print(flavors[index].Id);
             setState(() {
               flavors.removeAt(index);
             });
           },
           child: Card(
-            child: ListTile(
-              title: Text(
-                flavor.NameFlavor,
+            child: GestureDetector(
+              onLongPress: () {
+                print('xdha');
+              },
+              child: ListTile(
+                title: Text(
+                  flavor.NameFlavor,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    )),
+
+                trailing: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: Icon(
+                      flavor.isFavorite ? Icons.favorite : Icons.favorite_border),
+                ),
               ),
-              trailing: Icon(
-                  flavor.isFavorite ? Icons.favorite : Icons.favorite_border),
             ),
           ),
         );

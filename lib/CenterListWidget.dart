@@ -19,57 +19,56 @@ class _CenterListWidgetState extends State<CenterListWidget> {
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Card(
-              child: Row(children: <Widget>[
-                const Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Text('Tasks',
-                        //  textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 60,
-                          fontWeight: FontWeight.w800,
-                        )),
-                  ),
-                ),
-                IconButton(
-                  iconSize: 54.0,
-                  splashRadius: 32.0,
-                  onPressed: () {
-                    context.read<RepoData>().setVisible(true);
-                  },
-                  icon: const Icon(
-                    Icons.add,
-                  ),
-                ),
-                SizedBox(
-                  height: 100,
-                ),
-              ]),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            VisibleWidget(controller: controller),
-            Expanded(
-              child: Container(
-                child: Center(
-                  child: ListPage(),
-
-                  /*
-                   ListView(
-                    children: _buildList(),
-                  ),  */
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Card(
+            child: Row(children: <Widget>[
+              const Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 16.0),
+                  child: Text('Tasks',
+                      //  textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 60,
+                        fontWeight: FontWeight.w800,
+                      )),
                 ),
               ),
+              IconButton(
+                iconSize: 54.0,
+                splashRadius: 32.0,
+                onPressed: () {
+                  context.read<RepoData>().setVisible(true);
+                },
+                icon: const Icon(
+                  Icons.add,
+                ),
+              ),
+              SizedBox(
+                height: 100,
+              ),
+            ]),
+
+          ),
+          VisibleWidget(controller: controller),
+          SizedBox(
+            height: 5,
+          ),
+          Expanded(
+            child: Container(
+              child: Center(
+                child: ListPage(),
+
+                /*
+                 ListView(
+                  children: _buildList(),
+                ),  */
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -104,7 +103,6 @@ class VisibleWidget extends StatelessWidget {
       context.read<RepoData>().setErrorText(false);
     }
 
-
     return Visibility(
       replacement: const SizedBox.shrink(),
       // maintainSize: false,
@@ -127,7 +125,7 @@ class VisibleWidget extends StatelessWidget {
             fluversCrud crud = fluversCrud();
             // crud.init();
             int id = await crud.add(controller.text);
-            Flavor flavor = Flavor(NameFlavor: controller.text, Id: 0);
+            Flavor flavor = Flavor(NameFlavor: controller.text, Id: id);
             context.read<RepoData>().addFlavor(flavor);
             context.read<RepoData>().setVisible(false);
             _onChange();
