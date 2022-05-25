@@ -65,22 +65,22 @@ class ScaffoldWithWillpop extends StatelessWidget {
 
       try {
         return (await showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: new Text('Are you sure?'),
-                content: new Text('Do you want to exit an App'),
-                actions: <Widget>[
-                  new FlatButton(
-                    onPressed: () => Navigator.of(context).pop(false),
-                    child: new Text('No'),
-                  ),
-                  new FlatButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    child: new Text('Yes'),
-                  ),
-                ],
+          context: context,
+          builder: (context) => AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to exit an App'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
               ),
-            )) ??
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
+        )) ??
             false;
       } catch (e) {
         print('Error: $e');
