@@ -50,7 +50,6 @@ class _CenterListWidgetState extends State<CenterListWidget> {
                 height: 100,
               ),
             ]),
-
           ),
           VisibleWidget(controller: controller),
           SizedBox(

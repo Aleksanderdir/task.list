@@ -45,10 +45,54 @@ class MyApp extends StatelessWidget {
                 ),
               ],
             ),
-            body: const CenterListWidget(),
+            body: ScaffoldWithWillpop(),
           ),
         );
       },
+    );
+  }
+}
+
+class ScaffoldWithWillpop extends StatelessWidget {
+  const ScaffoldWithWillpop({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Future<bool> _onWillPop() async {
+      print('_onWillPop');
+
+      try {
+        return (await showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: new Text('Are you sure?'),
+                content: new Text('Do you want to exit an App'),
+                actions: <Widget>[
+                  new FlatButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: new Text('No'),
+                  ),
+                  new FlatButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: new Text('Yes'),
+                  ),
+                ],
+              ),
+            )) ??
+            false;
+      } catch (e) {
+        print('Error: $e');
+        return true;
+      }
+    }
+
+    return Scaffold(
+      body: WillPopScope(
+        onWillPop: _onWillPop,
+        child: CenterListWidget(),
+      ),
     );
   }
 }
